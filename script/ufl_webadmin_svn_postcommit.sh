@@ -33,4 +33,4 @@
 REPO="$1"
 REV="$2"
 
-run-parts -- "$REPO"/hooks/post-commit.d
+run-parts --arg="$REPO" --arg="$REV" -- "$REPO"/hooks/post-commit.d

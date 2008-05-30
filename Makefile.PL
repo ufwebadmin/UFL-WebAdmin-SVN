@@ -11,6 +11,8 @@ requires_external_bin '/usr/bin/svnlook';
 requires_external_bin '/usr/bin/svnnotify';
 requires_external_bin 'run-parts';
 
+build_requires 'FindBin';
+build_requires 'Path::Class';
 build_requires 'Test::More';
 
 install_script glob('script/*.sh'), glob('script/*.py');
