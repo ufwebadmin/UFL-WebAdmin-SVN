@@ -1,5 +1,8 @@
 Revision history for UFL-WebAdmin-SVN
 
+0.03
+        - Remove a couple of unnecessary calls
+
 0.02  Wed Dec 10 17:18:54 EST 2008
         - Update for Trac 0.11
 
