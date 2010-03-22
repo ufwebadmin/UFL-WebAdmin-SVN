@@ -1,5 +1,9 @@
 Revision history for UFL-WebAdmin-SVN
 
+0.04
+        - Update email address for commit notifications to
+          webadmin-commits-l@lists.ufl.edu
+
 0.03  Wed Dec 10 17:23:15 EST 2008
         - Remove a couple of unnecessary calls
 
