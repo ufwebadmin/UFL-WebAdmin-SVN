@@ -1,5 +1,9 @@
 Revision history for UFL-WebAdmin-SVN
 
+0.05
+        - Move scripts from external repository for creating a repository
+          and Trac instance
+
 0.04  Mon Mar 22 16:43:12 EDT 2010
         - Update email address for commit notifications to
           webadmin-commits-l@lists.ufl.edu
