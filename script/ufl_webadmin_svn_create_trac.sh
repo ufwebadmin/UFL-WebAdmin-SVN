@@ -32,8 +32,9 @@ fi
 TRAC_SUBDIR="$(basename $TRAC_DIR)"
 
 trac-admin "$TRAC_DIR" initenv "$TRAC_NAME" "sqlite:db/trac.db" svn "$REPO_DIR" \
-    && chgrp apache "$TRAC_DIR"/attachments/ "$TRAC_DIR"/db/ "$TRAC_DIR"/db/trac.db "$TRAC_DIR"/log/ \
-    && chmod g+w "$TRAC_DIR"/attachments/ "$TRAC_DIR"/db/ "$TRAC_DIR"/db/trac.db "$TRAC_DIR"/log/ \
+    && mkdir -p "$TRAC_DIR"/gvcache/ \
+    && chgrp apache "$TRAC_DIR"/attachments/ "$TRAC_DIR"/db/ "$TRAC_DIR"/gvcache/ "$TRAC_DIR"/db/trac.db "$TRAC_DIR"/log/ \
+    && chmod g+w "$TRAC_DIR"/attachments/ "$TRAC_DIR"/db/ "$TRAC_DIR"/gvcache/ "$TRAC_DIR"/db/trac.db "$TRAC_DIR"/log/ \
     && mkdir -p "$TRAC_APACHE_INCLUDES" \
     && echo "Use TracProject \"$TRAC_DIR\" /trac/$TRAC_SUBDIR" > "$TRAC_APACHE_INCLUDES/$TRAC_SUBDIR".include \
     && trac-admin "$TRAC_DIR" component remove component1 \
