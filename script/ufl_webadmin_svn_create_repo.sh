@@ -2,7 +2,7 @@
 
 REPO_DIR="$1"
 REPO_USER="${2:-apache}"
-REPO_GROUP="${3:-apache}"
+REPO_GROUP="${3:-subversion}"
 
 if [ "x$REPO_DIR" == "x" ]; then
     echo "You must specify a location for the Subversion repository." > /dev/stderr
@@ -20,7 +20,7 @@ svnadmin create --fs-type fsfs "$REPO_DIR" \
     && ln -snf /usr/bin/ufl_webadmin_svn_postcommit_email.sh "$REPO_DIR"/hooks/post-commit.d/ \
     && ln -snf /usr/bin/ufl_webadmin_svn_postcommit_trac.sh "$REPO_DIR"/hooks/post-commit.d/ \
     && chown -R "$REPO_USER":"$REPO_GROUP" "$REPO_DIR" \
-    && find "$REPO_DIR" -print0 | xargs -0 chmod o-rwx
+    && find "$REPO_DIR" -not -path "$REPO_DIR/hooks/post-commit" -and -not -path "$REPO_DIR/hooks/post-commit.d*" -print0 | xargs -0 chmod o-rwx
 
 if [ $? ]; then
     echo "Subversion repository created at '$REPO_DIR'."
