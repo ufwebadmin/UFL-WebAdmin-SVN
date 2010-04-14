@@ -8,6 +8,7 @@ ADMIN_USER="${5:-dwc@ufl.edu}"
 TRAC_USER="${6:-apache}"
 TRAC_GROUP="${7:-apache}"
 TRAC_APACHE_INCLUDES="${8:-/etc/apache2/vhosts.d/trac}"
+BASE_URL="${9:-https://trac.webadmin.ufl.edu}"
 
 if [ "x$TRAC_DIR" == "x" ]; then
     echo "You must specify a location for the Trac instance." > /dev/stderr
@@ -54,20 +55,28 @@ trac-admin "$TRAC_DIR" initenv "$TRAC_NAME" "sqlite:db/trac.db" svn "$REPO_DIR" 
 file = /var/lib/trac/trac.ini
 
 [header_logo]
-link = https://trac.webadmin.ufl.edu/$TRAC_SUBDIR/
+link = $BASE_URL/$TRAC_SUBDIR/
 
 [project]
 descr = $TRAC_DESC
 name = $TRAC_NAME
-url = https://trac.webadmin.ufl.edu/$TRAC_SUBDIR/
+url = $BASE_URL/$TRAC_SUBDIR/
 
 [trac]
-base_url = https://trac.webadmin.ufl.edu/$TRAC_SUBDIR/
+base_url = $BASE_URL/$TRAC_SUBDIR/
 repository_dir = $REPO_DIR
 EOF
 
 if [ $? ]; then
-    echo "Trac instance configured at '$TRAC_DIR'. Don't forget to restart Apache."
+    cat > /dev/stdout <<EOF
+Trac instance configured at '$TRAC_DIR'. Don't forget to restart Apache.
+
+Add the following to the global Trac configuration under the "intertrac" section:
+
+$TRAC_SUBDIR.title = $TRAC_NAME
+$TRAC_SUBDIR.url = $BASE_URL/$TRAC_SUBDIR
+EOF
+
 else
     echo "Error configuring Trac instance at '$TRAC_DIR'." > /dev/stderr
     exit 5
