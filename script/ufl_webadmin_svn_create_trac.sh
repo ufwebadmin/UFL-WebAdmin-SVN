@@ -19,22 +19,22 @@ fi
 
 if [ "x$TRAC_NAME" == "x" ]; then
     echo "You must specify project name for the Trac instance." > /dev/stderr
-    exit 2
+    exit 1
 fi
 
 if [ "x$TRAC_DB" == "x" ]; then
     echo "You must specify the database connection string for the Trac instance." > /dev/stderr
-    exit 3
+    exit 1
 fi
 
 if [ ! -d "$REPO_DIR" ]; then
     echo "You must have a Subversion repository at '$REPO_DIR'." > /dev/stderr
-    exit 4
+    exit 1
 fi
 
 if [ -d "$TRAC_DIR" ]; then
     echo "It looks like a Trac instance already exists at '$TRAC_DIR'." > /dev/stderr
-    exit 5
+    exit 1
 fi
 
 TRAC_SUBDIR="$(basename $TRAC_DIR)"
@@ -135,7 +135,7 @@ main() {
         display_additional_configuration
     else
         echo "Error configuring Trac instance at '$TRAC_DIR'." > /dev/stderr
-        exit 5
+        exit 1
     fi
 }
 
