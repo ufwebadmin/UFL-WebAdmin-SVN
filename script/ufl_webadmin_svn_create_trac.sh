@@ -39,35 +39,27 @@ fi
 
 TRAC_SUBDIR="$(basename $TRAC_DIR)"
 
+
 #
 # Functions
 #
 
-_update_permissions() {
-    chgrp "$TRAC_GROUP" $@ && chmod g+w $@
-}
-
-
-#
-# Main script
-#
-
-# Create and configure the Trac instance
-trac-admin "$TRAC_DIR" initenv "$TRAC_NAME" "$TRAC_DB" svn "$REPO_DIR" \
-    && trac-admin "$TRAC_DIR" component remove component1 \
-    && trac-admin "$TRAC_DIR" component remove component2 \
-    && trac-admin "$TRAC_DIR" milestone remove milestone1 \
-    && trac-admin "$TRAC_DIR" milestone remove milestone2 \
-    && trac-admin "$TRAC_DIR" milestone remove milestone3 \
-    && trac-admin "$TRAC_DIR" milestone remove milestone4 \
-    && trac-admin "$TRAC_DIR" version remove 1.0 \
-    && trac-admin "$TRAC_DIR" version remove 2.0 \
-    && trac-admin "$TRAC_DIR" permission add "$ADMIN_USER" webadmin \
-    && trac-admin "$TRAC_DIR" permission add webadmin TRAC_ADMIN \
-    && trac-admin "$TRAC_DIR" permission add anonymous TICKET_CREATE \
-    && mkdir -p "$TRAC_APACHE_INCLUDES" \
-    && echo "Use TracProject /$TRAC_SUBDIR" > "$TRAC_APACHE_INCLUDES/$TRAC_SUBDIR".include \
-    && cat > "$TRAC_DIR"/conf/trac.ini <<EOF
+create_trac_instance() {
+    trac-admin "$TRAC_DIR" initenv "$TRAC_NAME" "$TRAC_DB" svn "$REPO_DIR" \
+        && trac-admin "$TRAC_DIR" component remove component1 \
+        && trac-admin "$TRAC_DIR" component remove component2 \
+        && trac-admin "$TRAC_DIR" milestone remove milestone1 \
+        && trac-admin "$TRAC_DIR" milestone remove milestone2 \
+        && trac-admin "$TRAC_DIR" milestone remove milestone3 \
+        && trac-admin "$TRAC_DIR" milestone remove milestone4 \
+        && trac-admin "$TRAC_DIR" version remove 1.0 \
+        && trac-admin "$TRAC_DIR" version remove 2.0 \
+        && trac-admin "$TRAC_DIR" permission add "$ADMIN_USER" webadmin \
+        && trac-admin "$TRAC_DIR" permission add webadmin TRAC_ADMIN \
+        && trac-admin "$TRAC_DIR" permission add anonymous TICKET_CREATE \
+        && mkdir -p "$TRAC_APACHE_INCLUDES" \
+        && echo "Use TracProject /$TRAC_SUBDIR" > "$TRAC_APACHE_INCLUDES/$TRAC_SUBDIR".include \
+        && cat > "$TRAC_DIR"/conf/trac.ini <<EOF
 # -*- coding: utf-8 -*-
 
 [header_logo]
@@ -89,9 +81,13 @@ base_url = $BASE_URL/$TRAC_SUBDIR/
 database = $TRAC_DB
 repository_dir = $REPO_DIR
 EOF
+}
 
-# Update the permissions for the Trac user
-if [ $? ]; then
+_update_permissions() {
+    chgrp "$TRAC_GROUP" $@ && chmod g+w $@
+}
+
+update_permissions() {
     mkdir -p "$TRAC_DIR"/gvcache/ \
         && _update_permissions "$TRAC_DIR"/attachments/ "$TRAC_DIR"/conf/ "$TRAC_DIR"/gvcache/ "$TRAC_DIR"/log/ \
 
@@ -103,12 +99,12 @@ if [ $? ]; then
     if [ -f "$TRAC_DIR"/db/trac.db ]; then
         _update_permissions "$TRAC_DIR"/db/trac.db
     fi
-fi
+}
 
-# Finish up
-if [ $? ]; then
+display_additional_configuration() {
     cat > /dev/stdout <<EOF
-Trac instance configured at '$TRAC_DIR'. Don't forget to restart Apache.
+Trac instance configured at "$TRAC_DIR". Don't forget to restart
+Apache.
 
 To enable easy linking between Trac instances, Add the following to the global
 Trac configuration under the "intertrac" section:
@@ -125,8 +121,22 @@ file:
 trac+$TRAC_SUBDIR: "| /var/lib/trac/plugins/mail2trac -p /var/lib/trac/env/$TRAC_SUBDIR"
 ###
 EOF
+}
 
-else
-    echo "Error configuring Trac instance at '$TRAC_DIR'." > /dev/stderr
-    exit 5
-fi
+
+#
+# Main script
+#
+
+main() {
+    create_trac_instance && update_permissions
+
+    if [ $? ]; then
+        display_additional_configuration
+    else
+        echo "Error configuring Trac instance at '$TRAC_DIR'." > /dev/stderr
+        exit 5
+    fi
+}
+
+main
