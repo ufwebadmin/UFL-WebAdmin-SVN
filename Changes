@@ -1,5 +1,9 @@
 Revision history for UFL-WebAdmin-SVN
 
+0.06
+        - Add support for additional databases to the Trac creation
+          script
+
 0.05  Wed Apr 14 12:29:47 EDT 2010
         - Move scripts from external repository for creating a repository
           and Trac instance
