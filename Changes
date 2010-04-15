@@ -1,6 +1,6 @@
 Revision history for UFL-WebAdmin-SVN
 
-0.06
+0.06  Thu Apr 15 10:34:34 EDT 2010
         - Add support for additional databases to the Trac creation
           script
         - Refactor Trac creation script
