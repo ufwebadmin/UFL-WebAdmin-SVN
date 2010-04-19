@@ -66,7 +66,7 @@ create_trac_instance() {
 link = $BASE_URL/$TRAC_SUBDIR/
 
 [inherit]
-file = /var/lib/trac/trac.ini
+file = /var/lib/trac/global.ini
 
 [notification]
 smtp_replyto = trac+$TRAC_SUBDIR@trac.webadmin.ufl.edu
