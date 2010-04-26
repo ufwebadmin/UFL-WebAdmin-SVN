@@ -69,7 +69,7 @@ link = $BASE_URL/$TRAC_SUBDIR/
 file = /var/lib/trac/global.ini
 
 [notification]
-smtp_replyto = trac+$TRAC_SUBDIR@trac.webadmin.ufl.edu
+smtp_from = trac+$TRAC_SUBDIR@trac.webadmin.ufl.edu
 
 [project]
 descr = $TRAC_DESC
@@ -118,7 +118,14 @@ To enable sending mail to this instance, add the following to the mail aliases
 file:
 
 ###
-trac+$TRAC_SUBDIR: "| /var/lib/trac/plugins/mail2trac -p /var/lib/trac/env/$TRAC_SUBDIR"
+trac+$TRAC_SUBDIR: "| /usr/bin/run_email2trac -p $TRAC_SUBDIR"
+###
+
+Also, add the following to /etc/email2trac.conf:
+
+###
+[$TRAC_SUBDIR]
+project: $TRAC_DIR
 ###
 EOF
 }

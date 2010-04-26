@@ -1,5 +1,8 @@
 Revision history for UFL-WebAdmin-SVN
 
+0.08
+        - Add email2trac information to Trac creation script
+
 0.07  Mon Apr 19 17:09:13 EDT 2010
         - Update path to global Trac configuration file
 
