@@ -1,6 +1,6 @@
 Revision history for UFL-WebAdmin-SVN
 
-0.09
+0.09  Tue Aug  3 13:31:07 EDT 2010
         - Restructure Subversion hook scripts to make them more
           flexible
         - Update Trac hooks for version 0.12
