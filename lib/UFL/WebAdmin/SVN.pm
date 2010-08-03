@@ -3,7 +3,7 @@ package UFL::WebAdmin::SVN;
 use strict;
 use warnings;
 
-our $VERSION = '0.08';
+our $VERSION = '0.09_01';
 
 =head1 NAME
 
@@ -12,9 +12,9 @@ UFL::WebAdmin::SVN - SVN helpers for Web Administration
 =head1 SYNOPSIS
 
     $ mkdir /var/svn/repos/websites/hooks/post-commit.d
-    $ ln -s /usr/bin/ufl_webadmin_postcommit.sh /var/svn/repos/websites/hooks/post-commit
-    $ ln -s /usr/bin/ufl_webadmin_postcommit_email.sh /var/svn/repos/websites/hooks/post-commit.d
-    $ ln -s /usr/bin/ufl_webadmin_postcommit_trac.sh /var/svn/repos/websites/hooks/post-commit.d
+    $ ln -s /usr/bin/ufl_webadmin_hook_runner.sh /var/svn/repos/websites/hooks/post-commit
+    $ ln -s /usr/bin/ufl_webadmin_hook_post_commit_email.sh /var/svn/repos/websites/hooks/post-commit.d
+    $ ln -s /usr/bin/ufl_webadmin_hook_post_commit_trac.sh /var/svn/repos/websites/hooks/post-commit.d
 
 =head1 DESCRIPTION
 

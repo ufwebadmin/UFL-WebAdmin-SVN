@@ -1,5 +1,10 @@
 Revision history for UFL-WebAdmin-SVN
 
+0.09
+        - Restructure Subversion hook scripts to make them more
+          flexible
+        - Update Trac hooks for version 0.12
+
 0.08  Mon Apr 26 14:55:39 EDT 2010
         - Add email2trac information to Trac creation script
 
