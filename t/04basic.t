@@ -13,7 +13,6 @@ my $repo = dir($FindBin::Bin)->subdir('data', 'repo');
 
 foreach my $hook (qw/post-commit post-revprop-change/) {
     my $hook_runner = dir($repo)->subdir('hooks')->file($hook);
-    unlink $hook_runner;
     ok(! -f $hook_runner, "$hook symlink does not exist");
 
     system(qw/ln -s/, $script, $hook_runner);
@@ -22,4 +21,6 @@ foreach my $hook (qw/post-commit post-revprop-change/) {
     my $output = qx{$hook_runner $repo 1};
     chomp $output;
     is($output, "$hook: REPO = [$repo], REV = [1]", "$hook plugin script ran successfully");
+
+    unlink $hook_runner;
 }
