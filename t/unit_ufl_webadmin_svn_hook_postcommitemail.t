@@ -16,7 +16,7 @@ my $repository = dir($FindBin::Bin)->subdir('data', 'repo');
 my $hook = UFL::WebAdmin::SVN::Hook::PostCommitEmail->new(
     config     => "$config",
     repository => "$repository",
-    revision   => 1,
+    revision   => 3,
 );
 
 isa_ok($hook, 'UFL::WebAdmin::SVN::Hook::PostCommitEmail');
@@ -30,9 +30,11 @@ $hook->output($io);
 
 like($output, qr/^From:\s+dwc\@ufl\.edu/m, 'Found the From: header');
 like($output, qr/^To:\s+dwc\@ufl\.edu/m, 'Found the To: header');
-like($output, qr/^Subject:\s+\[1\] Here's a file/m, 'Found the Subject: header');
-like($output, qr/Revision:\s+1/, 'Found a revision');
+like($output, qr/^Subject:\s+\[WebAdmin SVN\]\[3\] test: Changing this file/m, 'Found the Subject: header');
+like($output, qr/Revision:\s+3/, 'Found a revision');
 like($output, qr/Author:\s+dwc/, 'Found an author');
-like($output, qr/Added Paths:/, 'Commit information matches');
+like($output, qr/Modified Paths:/, 'Commit information matches');
+like($output, qr/Modified: test/, 'Found diff heading');
+like($output, qr/\+Foo\. Bar\. Baz\./, 'Found diff');
 
 done_testing();
