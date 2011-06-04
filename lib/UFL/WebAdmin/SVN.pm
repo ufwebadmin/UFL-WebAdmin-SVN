@@ -13,7 +13,7 @@ UFL::WebAdmin::SVN - SVN helpers for Web Administration
 
     $ mkdir /var/svn/repos/websites/hooks/post-commit.d
     $ ln -s /usr/bin/ufl_webadmin_hook_runner.sh /var/svn/repos/websites/hooks/post-commit
-    $ ln -s /usr/bin/ufl_webadmin_hook_post_commit_email.sh /var/svn/repos/websites/hooks/post-commit.d
+    $ ln -s /usr/bin/ufl_webadmin_hook_post_commit_email.pl /var/svn/repos/websites/hooks/post-commit.d
     $ ln -s /usr/bin/ufl_webadmin_hook_post_commit_trac.sh /var/svn/repos/websites/hooks/post-commit.d
 
 =head1 DESCRIPTION

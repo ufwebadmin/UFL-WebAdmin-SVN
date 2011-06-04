@@ -17,7 +17,7 @@ fi
 svnadmin create --fs-type fsfs "$REPO_DIR" \
     && ln -snf /usr/bin/ufl_webadmin_svn_hook_runner.sh "$REPO_DIR"/hooks/post-commit \
     && mkdir "$REPO_DIR"/hooks/post-commit.d \
-    && ln -snf /usr/bin/ufl_webadmin_svn_hook_post_commit_email.sh "$REPO_DIR"/hooks/post-commit.d/ \
+    && ln -snf /usr/bin/ufl_webadmin_svn_hook_post_commit_email.pl "$REPO_DIR"/hooks/post-commit.d/ \
     && ln -snf /usr/bin/ufl_webadmin_svn_hook_post_commit_trac.sh "$REPO_DIR"/hooks/post-commit.d/ \
     && ln -snf /usr/bin/ufl_webadmin_svn_hook_runner.sh "$REPO_DIR"/hooks/post-revprop-change \
     && mkdir "$REPO_DIR"/hooks/post-revprop-change.d \
