@@ -1,5 +1,9 @@
 Revision history for UFL-WebAdmin-SVN
 
+0.10  Sun Jun  5 11:14:56 EDT 2011
+        - Rewrite Subversion post-commit email hook to make it more
+          easily configurable
+
 0.09  Tue Aug  3 13:31:07 EDT 2010
         - Restructure Subversion hook scripts to make them more
           flexible
