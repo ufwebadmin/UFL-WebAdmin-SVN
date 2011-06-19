@@ -84,21 +84,12 @@ EOF
 }
 
 _update_permissions() {
-    chgrp "$TRAC_GROUP" $@ && chmod g+w $@
+    chgrp -R "$TRAC_GROUP" $@ && chmod -R g+rw $@
 }
 
 update_permissions() {
     mkdir -p "$TRAC_DIR"/gvcache/ \
-        && _update_permissions "$TRAC_DIR"/attachments/ "$TRAC_DIR"/conf/ "$TRAC_DIR"/gvcache/ "$TRAC_DIR"/log/ \
-
-    # Update permissions for SQLite, if we're using it
-    if [ -d "$TRAC_DIR"/db/ ]; then
-        _update_permissions "$TRAC_DIR"/db/
-    fi
-
-    if [ -f "$TRAC_DIR"/db/trac.db ]; then
-        _update_permissions "$TRAC_DIR"/db/trac.db
-    fi
+        && _update_permissions "$TRAC_DIR"/attachments/ "$TRAC_DIR"/conf/ "$TRAC_DIR"/db/ "$TRAC_DIR"/gvcache/ "$TRAC_DIR"/log/
 }
 
 display_additional_configuration() {

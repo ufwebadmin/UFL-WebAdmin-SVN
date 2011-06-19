@@ -1,5 +1,9 @@
 Revision history for UFL-WebAdmin-SVN
 
+0.11
+        - Recursively set permissions on Trac directories for web
+          server
+
 0.10  Sun Jun  5 11:14:56 EDT 2011
         - Rewrite Subversion post-commit email hook to make it more
           easily configurable
