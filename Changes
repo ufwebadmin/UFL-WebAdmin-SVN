@@ -1,6 +1,6 @@
 Revision history for UFL-WebAdmin-SVN
 
-0.11
+0.11  Sun Jun 19 11:56:57 EDT 2011
         - Recursively set permissions on Trac directories for web
           server
 

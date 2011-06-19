@@ -3,7 +3,7 @@ package UFL::WebAdmin::SVN;
 use strict;
 use warnings;
 
-our $VERSION = '0.11_01';
+our $VERSION = '0.11';
 
 =head1 NAME
 
